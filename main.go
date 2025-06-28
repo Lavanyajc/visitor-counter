@@ -66,7 +66,11 @@ func main() {
 
 	// Optional health check
 	r.GET("/", func(c *gin.Context) {
-		c.String(http.StatusOK, "Visitor Counter API is running Lavanya !")
+ HEAD
+		
+
+		c.String(http.StatusOK, "Hi JC ,Visitor Counter API is running!")
+ a9f75e3 (main go file update to check auto deploy)
 	})
 
 	port := os.Getenv("PORT")
