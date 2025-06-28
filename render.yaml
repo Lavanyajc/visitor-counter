@@ -7,3 +7,4 @@ services:
     buildCommand: go build -o app .
     startCommand: ./app
     autoDeploy: true
+    region: singapore
