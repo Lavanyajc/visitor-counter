@@ -3,7 +3,6 @@ package main
 import (
 	"encoding/json"
 	"io/ioutil"
-
 	"net/http"
 	"os"
 	"sync"
@@ -38,19 +37,20 @@ func writeCounter(counter Counter) {
 
 func main() {
 	r := gin.Default()
-	 r.Use(func(c *gin.Context) {
-	       c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
-	       c.Writer.Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
-	       c.Writer.Header().Set("Access-Control-Allow-Headers", "Origin, Content-Type, Accept")
-	       if c.Request.Method == "OPTIONS" {
-		    c.AbortWithStatus(204)
-	            return
-	       }
-	       c.Next()
-       })
 
+	// CORS middleware
+	r.Use(func(c *gin.Context) {
+		c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
+		c.Writer.Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
+		c.Writer.Header().Set("Access-Control-Allow-Headers", "Origin, Content-Type, Accept")
+		if c.Request.Method == "OPTIONS" {
+			c.AbortWithStatus(204)
+			return
+		}
+		c.Next()
+	})
 
-
+	// Visit counter endpoint
 	r.GET("/visits", func(c *gin.Context) {
 		mu.Lock()
 		defer mu.Unlock()
@@ -64,15 +64,12 @@ func main() {
 		})
 	})
 
-	// Optional health check
+	// Health check endpoint
 	r.GET("/", func(c *gin.Context) {
- HEAD
-		
-
-		c.String(http.StatusOK, "Hi JC ,Visitor Counter API is running!")
- a9f75e3 (main go file update to check auto deploy)
+		c.String(http.StatusOK, "Hi JC, Visitor Counter API is running!")
 	})
 
+	// Start server
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = "8080"
