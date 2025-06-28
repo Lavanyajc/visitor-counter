@@ -66,7 +66,7 @@ func main() {
 
 	// Optional health check
 	r.GET("/", func(c *gin.Context) {
-		c.String(http.StatusOK, "Visitor Counter API is running")
+		c.String(http.StatusOK, "Visitor Counter API is running JC!")
 	})
 
 	port := os.Getenv("PORT")
