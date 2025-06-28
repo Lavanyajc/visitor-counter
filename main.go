@@ -66,7 +66,7 @@ func main() {
 
 	// Health check endpoint
 	r.GET("/", func(c *gin.Context) {
-		c.String(http.StatusOK, "Hi JC, Visitor Counter API is running!")
+		c.String(http.StatusOK, "Hi Lavanya JC, Visitor Counter API is running!")
 	})
 
 	// Start server
