@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: visitor-counter
+    runtime: go
+    repo: https://github.com/Lavanyajc/visitor-counter
+    branch: main
+    buildCommand: go build -o app .
+    startCommand: ./app
+    autoDeploy: true
